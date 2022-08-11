@@ -1,0 +1,97 @@
+{
+  "project_info": {
+    "project_number": "142319262836",
+    "project_id": "foodpanda-cloneapp-fa297",
+    "storage_bucket": "foodpanda-cloneapp-fa297.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:142319262836:android:95e86d4a0c3b5d86e48521",
+        "android_client_info": {
+          "package_name": "com.example.food_user_app"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "142319262836-q1vcu9vqoelm7cfgk4s97hj89gn89prq.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBk9EL2I-bw1Hchq9EUEuvKD9DfzC-ZmZM"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "142319262836-q1vcu9vqoelm7cfgk4s97hj89gn89prq.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:142319262836:android:c6965fe8478b2cc5e48521",
+        "android_client_info": {
+          "package_name": "com.example.ridersapp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "142319262836-q1vcu9vqoelm7cfgk4s97hj89gn89prq.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBk9EL2I-bw1Hchq9EUEuvKD9DfzC-ZmZM"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "142319262836-q1vcu9vqoelm7cfgk4s97hj89gn89prq.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:142319262836:android:0ad20225f08676a9e48521",
+        "android_client_info": {
+          "package_name": "com.example.sellers_app"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "142319262836-q1vcu9vqoelm7cfgk4s97hj89gn89prq.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBk9EL2I-bw1Hchq9EUEuvKD9DfzC-ZmZM"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "142319262836-q1vcu9vqoelm7cfgk4s97hj89gn89prq.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -1,0 +1,555 @@
+<style>
+        p {
+        margin-top: 0;
+        margin-bottom: 1rem;
+        text-align: right;
+    }
+    </style>
+
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+
+<head>
+<meta charset="utf-8">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <meta name="keywords" content="سندر,التوصيل,توصيل,دليفري,تطبيق سندر,تطبيق توصيل الطلبات,توصيل الطلبات,تطبيق للطلبات,snder">
+    <title>تطبيق سندر لحجز الطلبات والتوصيل</title>
+<meta name="description" content="سندر هو تطبيق إلكتروني يقدّم لك خدمات تسويق تناسب اهتماماتك، يجمع مزودي الخدمة الأقرب إليك حسب موقعك، ويتيح لك توصيل المنتجات والأغراض المنزلية واحتياجاتك اليومية في أسرع وقت وبأقل جهد.">
+<meta name="author" content="Tech Zone">
+<link rel="shortcut icon" href="https://snder.co/favicon.ico">
+<link rel="icon" type="image/svg+xml" href="https://snder.co/landing/assets/images/favicon.svg">
+<meta name="msapplication-TileColor" content="#0000">
+<meta name="facebook-domain-verification" content="oe54dpf0iip8m5m3fxhqd89ki2q6mk" />
+<meta name="theme-color" content="#000">
+    <meta property="og:locale" content="ar_AR" />
+    <meta property="og:locale:alternate" content="ar_AR" />
+    <meta property="og:locale:alternate" content="en_US" />
+    <meta property="og:image:width" content="600" />
+    <meta property="og:image:height" content="300" />
+    <meta name="twitter:site" content="@SnderApp" />
+    <meta name="twitter:creator" content="@SnderApp" />
+    <meta property="og:type" content="SnderApp" />
+
+    <meta property="og:title" content="تطبيق سندر لحجز الطلبات والتوصيل" />
+    <meta property="og:description" content="استمتع بتجربة تسوق جديدة ومميزة عبر استعراض المزودين الأقرب إليك" />
+    <meta property="og:url" content="https://snder.co" />
+    <meta property="og:image" itemprop="image" content="https://snder.co/landing/img/logo-w.png">
+
+    <meta property="twitter:description" content="استمتع بتجربة تسوق جديدة ومميزة عبر استعراض المزودين الأقرب إليك"  />
+    <meta property="twitter:image" content="https://snder.co/landing/img/logo-w.png" />
+    <meta name="twitter:card" content="-" />
+    <meta name="title" content="تطبيق سندر لحجز الطلبات والتوصيل" />
+    <meta property="twitter:title" content="تطبيق سندر لحجز الطلبات والتوصيل" />
+    <meta name="twitter:url" content="https://snder.co" />
+
+    <link rel="stylesheet" href="https://snder.co/adminAssets/plugins/global/plugins.bundle.rtl.css"  type="text/css"/>
+    <link rel="stylesheet" href="https://snder.co/adminAssets/plugins/custom/prismjs/prismjs.bundle.rtl.css">
+    <link rel="stylesheet" type="text/css" href="https://snder.co/landing/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://snder.co/landing/css/style.css">
+    <style>
+        .swal-button {
+            background-color: #f9b683;
+            color: #fff;
+            border: none;
+            box-shadow: none;
+            border-radius: 5px;
+            font-weight: 600;
+            font-size: 14px;
+            padding: 10px 24px;
+            margin: 0;
+            cursor: pointer;
+            margin-right: 269%!important;
+        }
+        .swal-text {
+            font-size: 16px;
+            position: relative;
+            float: none;
+            line-height: normal;
+            vertical-align: top;
+            text-align: center;
+            display: inline-block;
+            margin: 0;
+            padding: 0 10px;
+            font-weight: 400;
+            color: rgba(0,0,0,.64);
+            max-width: calc(100% - 20px);
+            overflow-wrap: break-word;
+            box-sizing: border-box;
+        }
+
+.swal2-title {
+padding: 1em 0 !important;
+font-size: 1.3em !important;
+
+}
+
+</style>
+    <link
+        rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"
+    />
+    <link rel="stylesheet" href="https://snder.co/landing/css/brands.min.css">
+    <link rel="stylesheet" href="https://snder.co/landing/css/regular.min.css">
+    <link rel="stylesheet" href="https://snder.co/landing/css/fontawesome.min.css">
+    <link rel="stylesheet" href="https://snder.co/landing/css/light.min.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/magnific-popup.js/1.0.0/magnific-popup.min.css" rel="stylesheet">
+    <script src="https://snder.co/landing/js/jquery-3.2.1.min.js"></script>
+    <script  src="https://snder.co/landing/js/bootstrap.min.js"></script>
+    <script src="https://snder.co/landing/js/popper.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/magnific-popup.js/1.0.0/jquery.magnific-popup.min.js"></script>
+    <script src="https://snder.co/landing/js/master.js"></script>
+    <script src="https://snder.co/landing/js/wow.min.js"></script>
+    <script>
+        new WOW().init();
+    </script>
+
+    <!-- Meta Pixel Code -->
+<script>
+  !function(f,b,e,v,n,t,s)
+  {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+  n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+  if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+  n.queue=[];t=b.createElement(e);t.async=!0;
+  t.src=v;s=b.getElementsByTagName(e)[0];
+  s.parentNode.insertBefore(t,s)}(window, document,'script',
+  'https://connect.facebook.net/en_US/fbevents.js');
+  fbq('init', '7765983096775782');
+  fbq('track', 'PageView');
+</script>
+<noscript><img height="1" width="1" style="display:none"
+  src="https://www.facebook.com/tr?id=7765983096775782&ev=PageView&noscript=1"
+/></noscript>
+<!-- End Meta Pixel Code -->
+<!-- Meta Pixel Code -->
+<script>
+!function(f,b,e,v,n,t,s)
+{if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+n.queue=[];t=b.createElement(e);t.async=!0;
+t.src=v;s=b.getElementsByTagName(e)[0];
+s.parentNode.insertBefore(t,s)}(window, document,'script',
+'https://connect.facebook.net/en_US/fbevents.js');
+fbq('init', '821328152380496');
+fbq('track', 'PageView');
+</script>
+<noscript><img height="1" width="1" style="display:none"
+src="https://www.facebook.com/tr?id=821328152380496&ev=PageView&noscript=1"
+/></noscript>
+<!-- End Meta Pixel Code -->
+</head>
+<body>
+<header class="wow slideInLeft" data-wow-duration="2s" data-wow-delay="5s"><img src="https://snder.co/landing/assets/images/background-header.svg" alt="snder" class="position-absolute topleft d-none d-lg-block" />
+    <div class="container" style="z-index: 10000;">
+        <div class="row justify-content-center mt-4">
+            <a href="https://snder.co" class="col-lg-2 px-5 px-lg-0 ml-lg-5 w-75 mt-lg-4"><img class="" alt="Logo Snder" src="https://snder.co/landing/assets/images/Logo.svg">
+            </a>
+            <ul class="nav mt-lg-5" style="z-index: 2">
+                <li><a class="p-3 d-none d-lg-block header-link" href="https://snder.co">الرئيسية</a></li>
+                <li><a class="p-3 d-block d-lg-block header-link" id="type" href="#aboutApp" >عن التطبيق</a></li>
+                <li><a class="p-3 d-block d-lg-block header-link" id="advantage" href="#advantageSnder">المميزات </a></li>
+                <li><a class="p-3 d-block d-lg-block header-link" href="https://snder.co/faqs">الاسئلة الشائعة</a></li>
+                <li><a class="p-3 d-block d-lg-block header-link" href="https://snder.co/blog">المدونة</a></li>
+                <li><a class="p-3 d-block d-lg-block mr-5 header-link" href="#contact" id="contactx">تواصل معنا</a></li>
+                <li><a class="d-block mt-lg-2 d-lg-block btn-outline-darkblue" href="https://snder.co/register">انضم كمزود</a></li>
+            </ul>
+
+        </div>
+    </div>
+</header>
+
+    <section id="landing-page">
+        <div class="container mt-lg-5">
+            <div class="row align-items-center">
+                <div class="col-lg-8 mt-5 mt-lg-0">
+                    <img src="https://snder.co/landing/assets/images/landpage/background.svg" alt="snder"
+                         class="img-fluid">
+                    <img src="https://snder.co/landing/assets/images/landpage/tool.svg" alt="snder"
+                         class="rotate-center tool position-absolute">
+                    <img src="https://snder.co/landing/assets/images/landpage/car.svg" alt="snder"
+                         class="w-25 slide-left car position-absolute">
+                </div>
+                <div class="col-lg-4">
+                    <h1 class=" mt-5 mt-lg-0 text-right boldx cb">
+                         تجربه تسوق جديدة من
+                        تطبيق سندر
+                    </h1>
+                    <h6 class=" text-right boldx ">استمتع بتجربة تسوق جديدة ومميزة عبر استعراض المزودين الأقرب إليك</h6>
+                    <div class="row align-items-center justify-content-center justify-content-lg-start mt-5">
+                        <small class=" mr-3">شاهد الفيديو</small>
+                        <a data-toggle="modal" data-target="#videoModal" href="#headerPopup" id="headerVideoLink"
+                           target="_blank"
+                           class="cb fa-3x fal fa-caret-circle-right mr-2 p-0 border-0 btn-outline-darkblue"></a>
+                        <a href="https://a.snder.co"
+                           class="btn-orange mt-2 mt-lg-0 mr-lg-4 mr-2"><small>تحميل التطبيق</small></a>
+
+
+                        <div class="modal fade p-0" id="videoModal" aria-hidden="true">
+                            <div class="modal-dialog modal-lg pt-5" role="document">
+                                <div class="modal-content">
+                                    <button type="button" class="close btn-round btn-primary" data-dismiss="modal"
+                                            aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                    <div class="embed-responsive embed-responsive-16by9">
+                                        <iframe width="560" height="315"
+                                                src="https://www.youtube.com/embed/Q6o-OmHxu0c"
+                                                allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
+                                                allowfullscreen></iframe>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section id="advantageSnder">
+        <div class="container mt-5">
+            <div class="text-center h4 boldx pt-5 cb">مميزاتنا</div>
+            <div class="row">
+                <div class="col-lg-4 mt-4 p-4">
+                    <img src="https://snder.co/landing/assets/images/advantage/fast-delivery.svg"
+                         alt="التوصيل لاي مكان" class="row m-auto"
+                         width="100"/>
+                    <h5 class="text-center boldx text-secondary mt-4">التوصيل لاي مكان</h5>
+                    <p class="text-center mt-3" style="font-weight: 100; color: #918F8F;">
+                        اذا كان عنوانك ضمن المناطق المدعومة كل ما عليك فعله هو اضافة تفاصيل عنوانك لتصلك الطلبية بأعلى جودة.
+                    </p>
+                </div>
+                <div class="col-lg-4 mt-4 p-4">
+                    <img src="https://snder.co/landing/assets/images/advantage/delivery%20(1).svg"
+                         alt="تتبع طلبك" class="row m-auto"
+                         width="100"/>
+                    <h5 class="text-center boldx text-secondary mt-4">تتبع طلبك</h5>
+                    <p class="text-center mt-3" style="font-weight: 100; color: #918F8F;">
+                        بإمكانك تتبع حالة طلبك من خلال شاشة طلباتي لمعرفة وين وصل طلبك
+
+                    </p>
+                </div>
+                <div class="col-lg-4 mt-4 p-4">
+                    <img src="https://snder.co/landing/assets/images/advantage/credit-card%20(1).svg"
+                         alt="محفظة إلكترونية" class="row m-auto"
+                         width="100"/>
+                    <h5 class="text-center boldx text-secondary mt-4">محفظة إلكترونية</h5>
+                    <p class="text-center mt-3" style="font-weight: 100; color: #918F8F;">
+                        تقدر تودع فيها أموال من خلال اقرب نقاط بيع وتستخدمها في الشراء بالتطبيق
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section id="aboutApp">
+        <div class="container align-items-center">
+            <div class="row mt-5">
+                <div class="col-lg-8 py-5">
+                    <h4 class="boldx cb text-right">اللي بخاطرك ، واصلك</h4>
+
+                    <p class="text-right" style="font-weight: 100;">
+                        <p>الخدمة الأسهل و الأسرع في الوصول الى المزود الذي تحب، اكتشف عشرات المطاعم والمتاجر القريبة إليك.<br></p><p><span style="font-weight: 600;">سندر</span>&nbsp;هو تطبيق موبايل صُمم لأجل راحتك، يهدف إلى توصيل الطلبات والاحتياجات والأغراض من أفضل مزودي الخدمة من المطاعم والسوبرماركت والصيدليات المحيطة بك والقريبة من مكانك، وذلك بأكثر الطرق كفاءة وبابتكار نظام عالي الجودة وتنفيذ الخدمات اللوجستية بكل سهولة ويسر.</p>
+                    </p>
+                </div>
+                <div class="col-lg-4">
+                    <div class="row m-0 d-lg-flex justify-content-center">
+                                                    <div class="col-6 text-center mt-3">
+                                <div class="py-3 px-2 type" style="background-color: #cbf4ff">
+                                    <img src="https://snder.co/uploads/photos/categories/images/2021-10-21/o5VekNsMn2Edp6zQ.svg" style="height:64px" alt="مطاعم"
+                                         class="m-auto img-fluid">
+                                    <div class="text-center mt-4">مطاعم</div>
+                                </div>
+                            </div>
+                                                    <div class="col-6 text-center mt-3">
+                                <div class="py-3 px-2 type" style="background-color: #e6e6e6">
+                                    <img src="https://snder.co/uploads/photos/categories/images/2021-12-24/ioXDnXa0cV7vpDi7.svg" style="height:64px" alt="مخابز"
+                                         class="m-auto img-fluid">
+                                    <div class="text-center mt-4">مخابز</div>
+                                </div>
+                            </div>
+                                                    <div class="col-6 text-center mt-3">
+                                <div class="py-3 px-2 type" style="background-color: #fff0e5">
+                                    <img src="https://snder.co/uploads/photos/categories/images/2022-03-05/EWIWDRIJqSexULLl.svg" style="height:64px" alt="حلويات"
+                                         class="m-auto img-fluid">
+                                    <div class="text-center mt-4">حلويات</div>
+                                </div>
+                            </div>
+                                                    <div class="col-6 text-center mt-3">
+                                <div class="py-3 px-2 type" style="background-color: #fff4f4">
+                                    <img src="https://snder.co/uploads/photos/categories/images/2021-10-21/HqEeExezsJ9QTvKt.svg" style="height:64px" alt="صيدليات"
+                                         class="m-auto img-fluid">
+                                    <div class="text-center mt-4">صيدليات</div>
+                                </div>
+                            </div>
+                                                    <div class="col-6 text-center mt-3">
+                                <div class="py-3 px-2 type" style="background-color: #f4e5ff">
+                                    <img src="https://snder.co/uploads/photos/categories/images/2022-04-11/61cQ7qWOhFjSHdqi.svg" style="height:64px" alt="خضار وفواكة"
+                                         class="m-auto img-fluid">
+                                    <div class="text-center mt-4">خضار وفواكة</div>
+                                </div>
+                            </div>
+                                                    <div class="col-6 text-center mt-3">
+                                <div class="py-3 px-2 type" style="background-color: #f2f2fd">
+                                    <img src="https://snder.co/uploads/photos/categories/images/2022-03-05/MDGwV0Kdnacp1y9A.svg" style="height:64px" alt="منوع"
+                                         class="m-auto img-fluid">
+                                    <div class="text-center mt-4">منوع</div>
+                                </div>
+                            </div>
+                                                    <div class="col-6 text-center mt-3">
+                                <div class="py-3 px-2 type" style="background-color: #d6f5df">
+                                    <img src="https://snder.co/uploads/photos/categories/images/2022-06-28/s58mwbLWh1l8gt5N.svg" style="height:64px" alt="ملابس"
+                                         class="m-auto img-fluid">
+                                    <div class="text-center mt-4">ملابس</div>
+                                </div>
+                            </div>
+                                            </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section id="download">
+        <div class="container py-5 mt-5">
+
+        <div class="row justify-content-center">
+        <div class="col-lg-5 col-12">
+        <div>
+                    <h3 class="boldx cb text-center">تحميل التطبيق</h3>
+                    <p  class="text-center">احصل على كل ما تحتاجه وقتما تشاء.</p>
+                </div>
+        </div>
+        <div class="col-lg-5 col-12 justify-content-center">
+<div class="row">
+
+
+                    <div class="col-6">
+                    <a class="store d-flex py-2  justify-content-center" href="https://a.snder.co">
+                    <div class="text-white text-center">
+                            <div style="font-size: 14px;">متاح في</div>
+                            <div style="font-size: 18px;">قوقل بلاي</div>
+                        </div>
+                        <div class="mr-3">
+                            <img src="https://snder.co/landing/assets/images/store/Group%205.svg" alt="تحميل التطبيق"
+                                 class="img-fluid">
+                        </div>
+
+                        </a>
+                    </div>
+
+
+                    <div class="col-6">
+                    <a class="store d-flex py-2 justify-content-center" href="https://a.snder.co">
+                        <div class="text-white text-center">
+                            <div style="font-size: 14px;">متاح في</div>
+                            <div style="font-size: 18px;">اب ستور</div>
+                        </div>
+                        <div class="mr-3">
+                            <div class="fab fa-apple fa-3x text-white"></div>
+                        </div>
+
+                        </a>
+                    </div>
+
+
+</div>
+        </div>
+        </div>
+
+
+
+
+        </div>
+
+
+    </section>
+
+
+    <footer id="contact" class="position-relative">
+    <img src="https://snder.co/landing/assets/images/footer.svg" class="footerimg d-none d-lg-block" alt="snder" width="620">
+    <div class="container">
+        <div class="row mt-4">
+            <div class="col-lg-4 ">
+
+            </div>
+            <div class="col-lg-8">
+                <div class="text-lg-right text-center">
+                    <h4 class="boldx cb">تواصل معنا</h4>
+                    <div>يمكنك الاتصال بنا على مدار الساعة</div>
+                    <div class="row mt-5 justify-content-center">
+                        <div class="">
+                            <div class="row align-items-center">
+                                <span class="fal fa-phone-volume cb fa-3x ml-3"></span>
+                                <div>
+                                    <p class="en m-0">0594120205</p>
+                                    <p class="en m-0"></p>
+                                </div>
+
+                            </div>
+                            <div class="row align-items-center mt-4">
+                                <span class="fal fa-envelope-open-text cb fa-3x ml-3"></span>
+                                <div>
+                                    <p  class="en  m-0">info@snder.co</h5>
+                                </div>
+
+                            </div>
+                            <div class="row align-items-center mt-4">
+                                <span class="fal fa-map-marked cb fa-3x ml-3"></span>
+
+                                <p style="font-size: 16px" class="pt-3">الأراضي الفلسطينية</p>
+
+
+                            </div>
+                        </div>
+                        <div class="col-lg-8 mr-lg-5 mt-5 mt-lg-0">
+
+                            <form id="sending_form">
+                                <input type="hidden" name="_token" value="kWB7L6zGRojNmvTRwqL6xBxT3wdhml5rqCvLqUbt">                                <div class=" ">
+                                    <div class="reloadthis row">
+                                        <div class="form-group col-lg-6">
+                                            <input class="form-control "
+                                                   name="f_name"
+                                                   type="text" placeholder="الاسم الاول"
+                                                   value=""/>
+                                                                                    </div>
+                                        <div class="form-group col-lg-6">
+                                            <input class="form-control "
+                                                   name="l_name"
+                                                   type="text" placeholder="الاسم الاخير"
+                                                   value=""/>
+                                                                                    </div>
+                                        <div class="form-group col-lg-6">
+                                            <input class="form-control "
+                                                   value="" type="tel"
+                                                   name="mobile" placeholder="رقم الهاتف"/>
+                                                                                    </div>
+                                        <div class="form-group col-lg-6">
+                                            <input class="form-control "
+                                                   name="email"
+                                                   type="email" placeholder="البريد الالكتروني" value=""/>
+                                                                                    </div>
+                                        <div class="form-group col-lg-12">
+                                        <textarea class="form-control "
+                                                  name="content" placeholder="الرسالة"
+                                                  rows="4"></textarea>
+                                                                                    </div>
+                                    </div>
+                                    <div class="m-auto pb-4 text-center">
+                                        <input type="button" id="send_form" value="ارسال"
+                                               class="btn-orange border-0 px-5">
+                                    </div>
+                                </div>
+
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+    <div id="footer" class="row m-0 py-1 position-relative">
+        <div class="p-4 col-12 text-righy">
+            <div class="row m-0">
+
+                <div class="col-lg-5 offset-lg-3 mb-4 text-center text-sm-right">
+
+
+                    <small class="my-5">  جميع حقوق النشر محفوظة لدى سندر <span class="en">© Snder Co. 2020</span></small>
+                    <div>
+                        <a class="text-dark small" href="/privacy-policy"> سياسة الخصوصية</a>
+
+                    </div>
+                </div>
+                <div class="col-lg-4 m-0 align-self-center">
+                    <ul class="nav p-0 justify-content-center" id="social-snder">
+                        <li class="ml-2"><a href="https://api.whatsapp.com/send?phone=972594120205"><i class="fab fa-whatsapp"></i></a></li>
+                        <li class="ml-2"><a href="https://www.instagram.com/SnderApp/"><i class="fab fa-instagram"></i></a></li>
+                        <li class="ml-2"><a href="https://twitter.com/SnderApp"><i class="fab fa-twitter"></i></a></li>
+                        <li class="ml-2"><a href="https://www.facebook.com/SnderApp"><i class="fab fa-facebook-f"></i></a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</footer>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/11.0.18/sweetalert2.all.js"
+        integrity="sha512-L75ujuHj04ye7EqWOTRxioEKz7fQrNcYEX2+k2YMt3kG6TvLe1BAGZ7EjY0sIbEUeougiQ5Dqoean/93XLww5w=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<script>
+    $(document).ready(function () {
+        $('#send_form').click(function () {
+            testf();
+        });
+
+        function testf() {
+            $.ajaxSetup({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                }
+            });
+            $.ajax({
+                url: "https://snder.co/contact_us",
+                data: new FormData($("#sending_form")[0]),
+                dataType: 'json',
+                async: false,
+                type: 'POST',
+                processData: false,
+                contentType: false,
+                success: function (e) {
+                    $('#sending_form').trigger("reset");
+
+                    Swal.fire({
+                        position: 'center',
+                        icon: 'success',
+                        title: 'تم الإرسال بنجاح',
+                        showConfirmButton: false,
+                        // timer: 2000
+                    })
+
+                    setTimeout(function () {
+                        var url = "https://snder.co";
+                        $(location).attr('href', url);
+                    }, 2000);
+                },
+                error: function (e) {
+
+                    console.log(e)
+                    $('.reloadthis').html($(e.responseText).find('.reloadthis'));
+                },
+            });
+        }
+    });
+
+</script>
+
+
+<script>
+    $('input[type=radio][name=category_id]').change(function () {
+        var id = this.value;
+        console.log(id);
+        jQuery.ajax({
+            url: '/loadSub/' + id,
+            type: "GET",
+            dataType: "json",
+            success: function (data) {
+                $('#subcat').empty();
+                if (data.length > 0)
+                {
+                    $("#title_subcat").show();
+                }else{
+                    $("#title_subcat").hide();
+                }
+                jQuery.each(data, function (key, value) {
+                    $('#subcat').append(' <div class="round">\n' +
+                        '                                <input name="subcat_id[]" value="' + value.id + '" type="checkbox" id="checkbox" />\n' +
+                        '                                <label for="checkbox">' + value.ar_name + '</label>\n' +
+                        '                            </div>');
+                });
+            }
+        });
+    });
+
+</script>
+</body>
+
+</html>

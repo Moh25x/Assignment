@@ -1,0 +1,272 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Running functional tests &mdash; magnum 4.1.3 documentation</title>
+    
+    <link rel="stylesheet" href="../_static/nature.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/tweaks.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '4.1.3',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <link rel="top" title="magnum 4.1.3 documentation" href="../index.html" />
+    <link rel="next" title="Release Notes" href="reno.html" />
+    <link rel="prev" title="Using Kubernetes external load balancer feature" href="kubernetes-load-balancer.html" /> 
+  </head>
+  <body role="document">
+  <div id="header">
+    <h1 id="logo"><a href="http://www.openstack.org/">OpenStack</a></h1>
+    <ul id="navigation">
+      
+      <li><a href="http://www.openstack.org/" title="Go to the Home page" class="link">Home</a></li>
+      <li><a href="http://www.openstack.org/projects/" title="Go to the OpenStack Projects page">Projects</a></li>
+      <li><a href="http://www.openstack.org/user-stories/" title="Go to the User Stories page" class="link">User Stories</a></li>
+      <li><a href="http://www.openstack.org/community/" title="Go to the Community page" class="link">Community</a></li>
+      <li><a href="http://www.openstack.org/blog/" title="Go to the OpenStack Blog">Blog</a></li>
+      <li><a href="http://wiki.openstack.org/" title="Go to the OpenStack Wiki">Wiki</a></li>
+      <li><a href="http://docs.openstack.org/" title="Go to OpenStack Documentation" class="current">Documentation</a></li>
+      
+    </ul>
+  </div>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="running-functional-tests">
+<h1>Running functional tests<a class="headerlink" href="#running-functional-tests" title="Permalink to this headline">¶</a></h1>
+<p>This is a guide for developers who want to run functional tests in their local
+machine.</p>
+<div class="section" id="prerequisite">
+<h2>Prerequisite<a class="headerlink" href="#prerequisite" title="Permalink to this headline">¶</a></h2>
+<p>You need to have a Magnum instance running somewhere. If you are using
+devstack, follow the developer quickstart guide to deploy Magnum in a devstack
+environment</p>
+<p><a class="reference external" href="http://docs.openstack.org/developer/magnum/dev/quickstart.html">http://docs.openstack.org/developer/magnum/dev/quickstart.html</a></p>
+</div>
+<div class="section" id="configuration">
+<h2>Configuration<a class="headerlink" href="#configuration" title="Permalink to this headline">¶</a></h2>
+<p>The functional tests require a couple configuration files, so you&#8217;ll need to
+generate them yourself.</p>
+<div class="section" id="for-devstack">
+<h3>For devstack<a class="headerlink" href="#for-devstack" title="Permalink to this headline">¶</a></h3>
+<p>If you&#8217;re using devstack, you can copy and modify the devstack configuration:</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span>cd /opt/stack/magnum
+cp /opt/stack/tempest/etc/tempest.conf /opt/stack/magnum/etc/tempest.conf
+cp functional_creds.conf.sample functional_creds.conf
+
+# update the IP address
+HOST=$(iniget /etc/magnum/magnum.conf api host)
+sed -i &quot;s/127.0.0.1/$HOST/&quot; functional_creds.conf
+
+# update admin password
+source /opt/stack/devstack/openrc admin admin
+iniset functional_creds.conf admin pass $OS_PASSWORD
+
+# update demo password
+source /opt/stack/devstack/openrc demo demo
+iniset functional_creds.conf auth password $OS_PASSWORD
+</pre></div>
+</div>
+<p>Set the DNS name server to be used by your cluster nodes (e.g. 8.8.8.8):</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span># update DNS name server
+source /opt/stack/devstack/openrc demo demo
+iniset functional_creds.conf magnum dns_nameserver &lt;dns-svr-ip-address&gt;
+</pre></div>
+</div>
+<p>Create the necessary keypair and flavor:</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span>source /opt/stack/devstack/openrc admin admin
+nova keypair-add --pub-key ~/.ssh/id_rsa.pub default
+nova flavor-create  m1.magnum 100 1024 10 1
+nova flavor-create  s1.magnum 200 512 10 1
+
+source /opt/stack/devstack/openrc demo demo
+nova keypair-add --pub-key ~/.ssh/id_rsa.pub default
+</pre></div>
+</div>
+<p>You may need to explicitly upgrade required packages if you&#8217;ve installed them
+before and their versions become too old:</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span>UPPER_CONSTRAINTS=/opt/stack/requirements/upper-constraints.txt
+sudo pip install -c $UPPER_CONSTRAINTS -U -r test-requirements.txt
+</pre></div>
+</div>
+</div>
+<div class="section" id="outside-of-devstack">
+<h3>Outside of devstack<a class="headerlink" href="#outside-of-devstack" title="Permalink to this headline">¶</a></h3>
+<p>If you are not using devstack, you&#8217;ll need to create the configuration files.
+The /etc/tempest.conf configuration file is documented here</p>
+<p><a class="reference external" href="http://docs.openstack.org/developer/tempest/configuration.html#tempest-configuration">http://docs.openstack.org/developer/tempest/configuration.html#tempest-configuration</a></p>
+<p>Here&#8217;s a reasonable sample of tempest.conf settings you might need:</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span>[auth]
+use_dynamic_credentials=False
+test_accounts_file=/tmp/etc/magnum/accounts.yaml
+admin_username=admin
+admin_password=password
+admin_project_name=admin
+
+[identity]
+disable_ssl_certificate_validation=True
+uri=https://identity.example.com/v2.0
+auth_version=v2
+region=EAST
+
+[identity-feature-enabled]
+api_v2 = true
+api_v3 = false
+trust = false
+
+[oslo_concurrency]
+lock_path = /tmp/
+
+[magnum]
+image_id=22222222-2222-2222-2222-222222222222
+nic_id=11111111-1111-1111-1111-111111111111
+keypair_id=default
+flavor_id=small
+magnum_url=https://magnum.example.com/v1
+
+[debug]
+trace_requests=true
+</pre></div>
+</div>
+<p>A sample functional_creds.conf can be found in the root of this project named
+functional_creds.conf.sample</p>
+<p>When you run tox, be sure to specify the location of your tempest.conf using
+TEMPEST_CONFIG_DIR:</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span>export TEMPEST_CONFIG_DIR=/tmp/etc/magnum/
+tox -e functional-api
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="execution">
+<h2>Execution<a class="headerlink" href="#execution" title="Permalink to this headline">¶</a></h2>
+<p>Magnum has different functional tests for each COE and for the API.
+All the environments are detailed in Magnum&#8217;s tox.ini:</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span>cat tox.ini | grep functional- | awk -F: &#39;{print $2}&#39; | sed s/]//
+</pre></div>
+</div>
+<p>To run a particular subset of tests, specify that group as a tox environment.
+For example, here is how you would run all of the kubernetes tests:</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span>tox -e functional-k8s
+</pre></div>
+</div>
+<p>To run a specific test or group of tests, specify the test path as a positional argument:</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span>tox -e functional-k8s -- magnum.tests.functional.k8s.v1.test_k8s_python_client.TestBayModelResource
+</pre></div>
+</div>
+<p>To avoid creating multiple clusters simultaneously, you can execute the tests
+with concurrency 1:</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span>tox -e functional-swarm -- --concurrency 1
+</pre></div>
+</div>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+<div class="sphinxsidebar">
+    <div class="sphinxsidebarwrapper">
+            <h3><a href="../index.html">Table Of Contents</a></h3>
+            <ul>
+<li><a class="reference internal" href="#">Running functional tests</a><ul>
+<li><a class="reference internal" href="#prerequisite">Prerequisite</a></li>
+<li><a class="reference internal" href="#configuration">Configuration</a><ul>
+<li><a class="reference internal" href="#for-devstack">For devstack</a></li>
+<li><a class="reference internal" href="#outside-of-devstack">Outside of devstack</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#execution">Execution</a></li>
+</ul>
+</li>
+</ul>
+
+            <h4>Previous topic</h4>
+            <p class="topless"><a href="kubernetes-load-balancer.html"
+                                  title="previous chapter">Using Kubernetes external load balancer feature</a></p>
+            <h4>Next topic</h4>
+            <p class="topless"><a href="reno.html"
+                                  title="next chapter">Release Notes</a></p>
+            <h3>Project Source</h3>
+            <ul class="this-page-menu">
+              <li><a href="http://git.openstack.org/cgit/openstack/magnum
+"
+                     rel="nofollow">Project Source</a></li>
+            </ul>
+            <h3>This Page</h3>
+            <ul class="this-page-menu">
+              <li><a href="../_sources/dev/functional-test.txt"
+                     rel="nofollow">Show Source</a></li>
+            </ul>
+          <div id="searchbox" style="display: none">
+            <h3>Quick search</h3>
+              <form class="search" action="../search.html" method="get">
+                <input type="text" name="q" size="18" />
+                <input type="submit" value="Go" />
+                <input type="hidden" name="check_keywords" value="yes" />
+                <input type="hidden" name="area" value="default" />
+              </form>
+              <p class="searchtip" style="font-size: 90%">
+              Enter search terms or a module, class or function name.
+              </p>
+          </div>
+          <script type="text/javascript">$('#searchbox').show(0);</script>
+    </div>
+</div>
+
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="reno.html" title="Release Notes"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="kubernetes-load-balancer.html" title="Using Kubernetes external load balancer feature"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">magnum 4.1.3 documentation</a> &raquo;</li> 
+      </ul>
+    </div>
+
+    <div class="footer" role="contentinfo">
+        &copy; Copyright 2013, OpenStack Foundation.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.3.6.
+    </div>
+<script type="text/javascript">
+var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+</script>
+<script type="text/javascript">
+try {
+//Tracking docs.openstack.org/developer/<projectname> only
+//The URL is built from the project variable in conf.py
+var pageTracker = _gat._getTracker("UA-17511903-1");
+pageTracker._setCookiePath("/developer/magnum");
+pageTracker._trackPageview();
+} catch(err) {}</script>
+
+  </body>
+</html>
